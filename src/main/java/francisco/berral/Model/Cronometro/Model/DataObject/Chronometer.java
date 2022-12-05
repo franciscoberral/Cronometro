@@ -1,6 +1,7 @@
-package francisco.berral.Model.DataObject;
+package francisco.berral.Model.Cronometro.Model.DataObject;
 
 public class Chronometer {
+	private int id;
 	private int hour;
 	private int minute;
 	private int second;
@@ -10,11 +11,20 @@ public class Chronometer {
 		
 	}
 	
-	public Chronometer(int hour, int minute, int second, int millisecond) {
+	public Chronometer(int id, int hour, int minute, int second, int millisecond) {
+		this.id = id;
 		this.hour = hour;
 		this.minute = minute;
 		this.second = second;
 		this.millisecond = millisecond;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getHour() {
@@ -51,7 +61,7 @@ public class Chronometer {
 
 	@Override
 	public String toString() {
-		return "Chronometer [hour=" + hour + ", minute=" + minute + ", second=" + second + ", millisecond="
+		return "Chronometer [id=" + id + "hour=" + hour + ", minute=" + minute + ", second=" + second + ", millisecond="
 				+ millisecond + "]";
 	}
 }

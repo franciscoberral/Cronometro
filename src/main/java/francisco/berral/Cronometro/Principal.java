@@ -4,7 +4,8 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
-import francisco.berral.Model.DataObject.Chronometer;
+import francisco.berral.Model.Cronometro.Model.DAO.ChronometerDAO;
+import francisco.berral.Model.Cronometro.Model.DataObject.Chronometer;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -67,7 +68,7 @@ public class Principal implements Runnable, Initializable {
 	
 	private Chronometer c;
 	
-	private Chronometer aux;
+	private ChronometerDAO cDAO = new ChronometerDAO();
 	
 	private boolean started;
 	
@@ -165,11 +166,9 @@ public class Principal implements Runnable, Initializable {
 	@FXML
 	public void pauseCounter() {
 		started = false;
-		int mvar = Integer.parseInt(millisecond.getText());
 		int svar = Integer.parseInt(second.getText());
 		int mivar = Integer.parseInt(minute.getText());
 		int hvar = Integer.parseInt(hour.getText());
-		aux = new Chronometer(hvar, mivar, svar, mvar);
 		String s1;
 		if (hvar < 10) {
 			s1 = "0" + hvar;
@@ -189,6 +188,7 @@ public class Principal implements Runnable, Initializable {
 			s3 = svar + "";
 		}
 		counterPause.setText(s1 + ":" + s2 + ":" + s3);
+		cDAO.insert(c);
 		stop.setVisible(false);
 		reanude.setVisible(true);
 		restart.setVisible(true);
@@ -202,11 +202,6 @@ public class Principal implements Runnable, Initializable {
 	@FXML 
 	public void reanudeCounter() {
 		started = true;
-		int a = aux.getMillisecond();
-		int b = aux.getSecond();
-		int ca = aux.getMinute();
-		int d = aux.getHour();
-		c = new Chronometer(d, ca, b, a);
 		thread = new Thread(this);
 		thread.start();
 		stop.setVisible(true);
@@ -275,7 +270,7 @@ public class Principal implements Runnable, Initializable {
 		
 		dateTime();
 		
-		Timeline timeline2 = new Timeline(new KeyFrame(Duration.seconds(5), ev -> {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), ev -> {
 			LocalDateTime localDate = LocalDateTime.now();
 			int ldyear = localDate.getYear();
 			int ldmonth = localDate.getMonthValue();
@@ -309,7 +304,7 @@ public class Principal implements Runnable, Initializable {
 			date.setText(s2 + "/" + s1 + "/" + ldyear);
 			time.setText(s3 + ":" + s4);
 	    }));
-	    timeline2.setCycleCount(Animation.INDEFINITE);
-	    timeline2.play();
+	    timeline.setCycleCount(Animation.INDEFINITE);
+	    timeline.play();
 	}
 }
