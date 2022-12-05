@@ -4,8 +4,8 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
-import francisco.berral.Model.Cronometro.Model.DAO.ChronometerDAO;
-import francisco.berral.Model.Cronometro.Model.DataObject.Chronometer;
+import francisco.berral.Cronometro.Model.DAO.ChronometerDAO;
+import francisco.berral.Cronometro.Model.DataObject.Chronometer;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -17,6 +17,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+/**
+ * Clase Principal
+ * @author Francisco José Berral Zafra
+ *
+ */
 public class Principal implements Runnable, Initializable {
 	
 	@FXML
@@ -80,6 +85,9 @@ public class Principal implements Runnable, Initializable {
 	
 	String ho;
 
+	/**
+	 * Método que ejecuta los procesos en un hilo
+	 */
 	@Override
 	public void run() {
 		try {
@@ -151,6 +159,9 @@ public class Principal implements Runnable, Initializable {
 		}
 	}
 	
+	/**
+	 * Método para iniciar el contador
+	 */
 	@FXML
 	public void startCounter() {
 		started = true;
@@ -163,6 +174,9 @@ public class Principal implements Runnable, Initializable {
 		iPlay.setVisible(false);
 	}
 	
+	/**
+	 * Método para pausar el contador
+	 */
 	@FXML
 	public void pauseCounter() {
 		started = false;
@@ -199,6 +213,9 @@ public class Principal implements Runnable, Initializable {
 		iNoStop.setVisible(false);
 	}
 	
+	/**
+	 * Método para reanudar el contador
+	 */
 	@FXML 
 	public void reanudeCounter() {
 		started = true;
@@ -213,6 +230,9 @@ public class Principal implements Runnable, Initializable {
 		iNoStop.setVisible(true);
 	}
 	
+	/**
+	 * Método para reiniciar el contador
+	 */
 	@FXML
 	public void restartCounter() {
 		millisecond.setText("000");
@@ -226,6 +246,9 @@ public class Principal implements Runnable, Initializable {
 		iNoStop.setVisible(true);
 	}
 	
+	/**
+	 * Método para establecer el formato de fecha y hora
+	 */
 	public void dateTime() {
 		LocalDateTime localDate = LocalDateTime.now();
 		int ldyear = localDate.getYear();
@@ -261,6 +284,9 @@ public class Principal implements Runnable, Initializable {
 		time.setText(s3 + ":" + s4);
 	}
 
+	/**
+	 * Método donde se ejecutan procesos al inicio
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		reanude.setVisible(false);

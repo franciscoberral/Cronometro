@@ -1,4 +1,4 @@
-package francisco.berral.Model.Cronometro.Model.DAO;
+package francisco.berral.Cronometro.Model.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,11 +7,22 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import francisco.berral.Cronometro.Connection.Connect;
-import francisco.berral.Model.Cronometro.Model.DataObject.Chronometer;
+import francisco.berral.Cronometro.Interfaces.IChronometerDAO;
+import francisco.berral.Cronometro.Model.DataObject.Chronometer;
 
-public class ChronometerDAO {
+/**
+ * Clase ChronometerDAO
+ * @author Francisco José Berral Zafra
+ *
+ */
+public class ChronometerDAO implements IChronometerDAO {
 	Connection myConnection = null;
 
+	/**
+	 * Método para insertar cronómetro
+	 * @param c Cronómetro que recibe
+	 * @return Si el objeto a sido insertado o no
+	 */
 	public boolean insert(Chronometer c) {
 		boolean result = false;
 		myConnection = Connect.getConnection();
