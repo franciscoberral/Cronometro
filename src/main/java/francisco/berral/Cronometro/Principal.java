@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 /**
@@ -41,6 +42,9 @@ public class Principal implements Runnable, Initializable {
 	
 	@FXML
 	private Button restart;
+	
+	@FXML
+	private Button show;
 	
 	@FXML
 	private Label date;
@@ -76,10 +80,19 @@ public class Principal implements Runnable, Initializable {
 	private ImageView iNoStop;
 	
 	@FXML
+	private ImageView openBook;
+	
+	@FXML
+	private ImageView closeBook;
+	
+	@FXML
 	private TableView<Chronometer> chrono;
 	
 	@FXML
 	private TableColumn<Chronometer, String> timeCol;
+	
+	@FXML
+	private AnchorPane an;
 	
 	private Thread thread;
 	
@@ -88,6 +101,8 @@ public class Principal implements Runnable, Initializable {
 	private ChronometerDAO cDAO = new ChronometerDAO();
 	
 	private boolean started;
+	
+	private boolean entered = false;
 	
 	String mi;
 	
@@ -259,6 +274,24 @@ public class Principal implements Runnable, Initializable {
 	}
 	
 	/**
+	 * Método para mostrar la lista de tiempos
+	 */
+	@FXML
+	public void showTimes() {
+		if (entered == false) {
+			an.setVisible(true);
+			entered = true;
+			openBook.setVisible(false);
+			closeBook.setVisible(true);
+		} else {
+			an.setVisible(false);
+			entered = false;
+			openBook.setVisible(true);
+			closeBook.setVisible(false);
+		}
+	}
+	
+	/**
 	 * Método para establecer el formato de fecha y hora
 	 */
 	public void dateTime() {
@@ -308,7 +341,7 @@ public class Principal implements Runnable, Initializable {
 		
 		dateTime();
 		
-		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), ev -> {
 			LocalDateTime localDate = LocalDateTime.now();
 			int ldyear = localDate.getYear();
 			int ldmonth = localDate.getMonthValue();

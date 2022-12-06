@@ -11,6 +11,15 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="720.0" style="-fx-background-color: darkblue;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="francisco.berral.Cronometro.Principal">
    <children>
+      <AnchorPane fx:id="an" layoutX="520.0" layoutY="-15.0" prefHeight="167.0" prefWidth="200.0" visible="false">
+         <children>
+            <TableView fx:id="chrono" layoutX="25.0" layoutY="33.0" prefHeight="102.0" prefWidth="154.0">
+              <columns>
+                <TableColumn fx:id="timeCol" prefWidth="153.60001220703126" text="TIME" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
       <AnchorPane layoutX="133.0" layoutY="45.0" prefHeight="460.0" prefWidth="460.0" style="-fx-background-color: white; -fx-border-radius: 250; -fx-border-color: black; -fx-background-radius: 250;" />
       <AnchorPane layoutX="163.0" layoutY="75.0" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: gray; -fx-border-color: black; -fx-border-radius: 200; -fx-background-radius: 200; -fx-border-width: 12;">
          <children>
@@ -31,6 +40,17 @@
                   <Label layoutX="193.0" layoutY="14.0" style="-fx-font-weight: bolder;" text="TIME:" />
                   <Label layoutX="193.0" layoutY="35.0" style="-fx-font-weight: bolder;" text="DATE:" />
                   <Label layoutX="202.0" layoutY="73.0" style="-fx-font-weight: bolder;" text="LAST COUNT " />
+                  <ImageView fx:id="openBook" fitHeight="24.0" fitWidth="26.0" layoutX="91.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/libro-abierto.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="closeBook" fitHeight="24.0" fitWidth="18.0" layoutX="94.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/libro-de-tapa-negra-cerrado.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="show" layoutX="91.0" layoutY="89.0" mnemonicParsing="false" onAction="#showTimes" opacity="0.0" prefHeight="18.0" prefWidth="26.0" text="Open" />
                </children>
             </AnchorPane>
             <Line endX="177.4000244140625" layoutX="173.0" layoutY="261.0" startX="-124.20001220703125" style="-fx-stroke-width: 2;" />
@@ -64,11 +84,5 @@
             <Button fx:id="restart" layoutX="229.0" layoutY="279.0" mnemonicParsing="false" onAction="#restartCounter" opacity="0.0" prefHeight="43.0" prefWidth="42.0" text="Stop" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="-25.0" prefHeight="200.0" prefWidth="200.0" />
-      <TableView fx:id="chrono" layoutX="551.0" layoutY="14.0" prefHeight="102.0" prefWidth="154.0">
-        <columns>
-          <TableColumn fx:id="timeCol" prefWidth="153.60001220703126" text="TIME" />
-        </columns>
-      </TableView>
    </children>
 </AnchorPane>

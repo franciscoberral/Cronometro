@@ -3,6 +3,7 @@ module francisco.berral.Cronometro {
     requires javafx.fxml;
 	requires java.sql;
 	requires java.xml.bind;
+	requires javafx.graphics;
 	
     opens francisco.berral.Cronometro to javafx.fxml;
     opens francisco.berral.Cronometro.Connection to java.xml.bind;
