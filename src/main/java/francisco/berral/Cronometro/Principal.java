@@ -2,6 +2,7 @@ package francisco.berral.Cronometro;
 
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import francisco.berral.Cronometro.Model.DAO.ChronometerDAO;
@@ -10,10 +11,15 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
@@ -68,6 +74,12 @@ public class Principal implements Runnable, Initializable {
 	
 	@FXML
 	private ImageView iNoStop;
+	
+	@FXML
+	private TableView<Chronometer> chrono;
+	
+	@FXML
+	private TableColumn<Chronometer, String> timeCol;
 	
 	private Thread thread;
 	
@@ -296,7 +308,7 @@ public class Principal implements Runnable, Initializable {
 		
 		dateTime();
 		
-		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), ev -> {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
 			LocalDateTime localDate = LocalDateTime.now();
 			int ldyear = localDate.getYear();
 			int ldmonth = localDate.getMonthValue();
@@ -329,6 +341,18 @@ public class Principal implements Runnable, Initializable {
 			}
 			date.setText(s2 + "/" + s1 + "/" + ldyear);
 			time.setText(s3 + ":" + s4);
+			
+			List<Chronometer> list = cDAO.getAll();
+			
+			ObservableList<Chronometer> ob = FXCollections.observableArrayList(list);
+			
+			timeCol.setCellValueFactory(chronometer ->{
+				SimpleStringProperty s = new SimpleStringProperty();
+				s.setValue(chronometer.getValue().getTime());
+				return s;
+			});
+			
+			chrono.setItems(FXCollections.observableArrayList(ob));
 	    }));
 	    timeline.setCycleCount(Animation.INDEFINITE);
 	    timeline.play();

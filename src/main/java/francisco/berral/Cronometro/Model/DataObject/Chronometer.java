@@ -1,5 +1,7 @@
 package francisco.berral.Cronometro.Model.DataObject;
 
+import java.sql.Timestamp;
+
 import francisco.berral.Cronometro.Interfaces.IChronometer;
 
 /**
@@ -12,6 +14,9 @@ public class Chronometer implements IChronometer {
 	private int minute;
 	private int second;
 	private int millisecond;
+	private int id;
+	private String time;
+	private Timestamp date;
 	
 	/**
 	 * Constructor
@@ -32,6 +37,12 @@ public class Chronometer implements IChronometer {
 		this.minute = minute;
 		this.second = second;
 		this.millisecond = millisecond;
+	}
+	
+	public Chronometer(int id, String time, Timestamp date) {
+		this.id = id;
+		this.time = time;
+		this.date = date;
 	}
 	
 	/**
@@ -98,13 +109,42 @@ public class Chronometer implements IChronometer {
 		this.millisecond = millisecond;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public Timestamp getDate() {
+		return date;
+	}
+
+	public void setDate(Timestamp date) {
+		this.date = date;
+	}
+
 	/**
 	 * Método para mostrar los datos del cronómetro
 	 * @return Datos del cronómetro
 	 */
-	@Override
+	/*@Override
 	public String toString() {
 		return "Chronometer [hour=" + hour + ", minute=" + minute + ", second=" + second + ", millisecond="
 				+ millisecond + "]";
+	}
+	*/
+	@Override
+	public String toString() {
+		return "id " + id + " time:" + time + " date:" + date;
 	}
 }
